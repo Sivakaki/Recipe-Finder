@@ -1,0 +1,234 @@
+/* ==========================================================================
+   SEARCH COMPONENT STYLES
+   ========================================================================== */
+
+.search-section {
+  background: var(--surface);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 2rem 2.4rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+/* ── Title ── */
+.search-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* ── Row: input on left, Advanced Filters on right ── */
+.search-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* ── Input group ── */
+.search-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  width: min(480px, 60%);
+}
+
+.search-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.search-input-wrapper {
+  position: relative;
+}
+
+.search-input {
+  height: 44px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 0 56px 0 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-subtle);
+}
+
+.search-icon-btn {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--primary);
+  color: white;
+  font-size: 1.3rem;
+  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
+}
+
+.search-icon-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* ── Advanced Filters — far right text link ── */
+.filter-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  /* align with the bottom of the input */
+  padding-bottom: 10px;
+  transition: color 0.2s ease;
+}
+
+.filter-toggle:hover {
+  color: var(--primary);
+}
+
+.filter-arrow {
+  font-size: 1rem;
+  transition: transform 0.25s ease;
+}
+
+.filter-toggle:hover .filter-arrow {
+  transform: rotate(180deg);
+}
+
+/* ── Filter Panel (below the row) ── */
+.filter-container {
+  border-top: 1px solid var(--border);
+  padding-top: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.filter-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-group label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.filter-group select {
+  width: 100%;
+  height: 44px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 0 1rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.filter-group select:hover {
+  border-color: var(--primary-light);
+}
+
+.filter-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-subtle);
+}
+
+.search-btn {
+  align-self: flex-end;
+  padding: 0.85rem 2.2rem;
+  background: var(--primary);
+  color: white;
+  border-radius: var(--radius-pill);
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  transition: var(--transition);
+  box-shadow: 0 6px 18px rgba(13, 148, 136, 0.25);
+}
+
+.search-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(13, 148, 136, 0.35);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .search-section {
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+
+  .search-title {
+    font-size: 1.7rem;
+  }
+
+  .search-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .filter-toggle {
+    padding-bottom: 0;
+    align-self: flex-start;
+  }
+
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-btn {
+    width: 100%;
+  }
+}

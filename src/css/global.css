@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Brand Primary Colors - Emerald & Teal (Custom Non-Pink Palette) */
+  --primary: #0d9488;
+  --primary-dark: #0f766e;
+  --primary-light: #14b8a6;
+  --primary-hover: #0f766e;
+  --primary-subtle: #ccfbf1;
+
+  /* Backgrounds & Surfaces */
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f0fdfa; /* Soft mint blush for hero container */
+  --surface-card: #ffffff;
+
+  /* Typography */
+  --text: #0f172a;
+  --text-muted: #475569;
+  --text-light: #64748b;
+
+  /* Borders & Shadows */
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+  --shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.06), 0 8px 16px -6px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 20px 30px -10px rgba(13, 148, 136, 0.12);
+
+  /* Tag & Badges */
+  --tag-bg: #e6f4f1;
+  --tag-color: #0f766e;
+  --tag-border: #bde5dd;
+
+  /* Nutrition Pill Colors */
+  --nutr-neutral-bg: #ffffff;
+  --nutr-neutral-border: #cbd5e1;
+  --nutr-neutral-text: #334155;
+
+  --nutr-low-bg: #ecfdf5;
+  --nutr-low-border: #a7f3d0;
+  --nutr-low-text: #047857;
+
+  --nutr-medium-bg: #fffbeb;
+  --nutr-medium-border: #fde68a;
+  --nutr-medium-text: #b45309;
+
+  --nutr-high-bg: #fef2f2;
+  --nutr-high-border: #fca5a5;
+  --nutr-high-text: #b91c1c;
+
+  /* Spacing & Layout */
+  --radius-sm: 8px;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 9999px;
+
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --bg: #0b1320;
+  --surface: #131e30;
+  --surface-alt: #16253b;
+  --surface-card: #182840;
+
+  --text: #f8fafc;
+  --text-muted: #cbd5e1;
+  --text-light: #94a3b8;
+
+  --border: #24344d;
+  --border-light: #1e2c42;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 20px 30px -10px rgba(13, 148, 136, 0.25);
+
+  --tag-bg: #1e3a38;
+  --tag-color: #5eead4;
+  --tag-border: #2d5a56;
+
+  --nutr-neutral-bg: #182840;
+  --nutr-neutral-border: #334155;
+  --nutr-neutral-text: #e2e8f0;
+
+  --nutr-low-bg: #064e3b;
+  --nutr-low-border: #047857;
+  --nutr-low-text: #6ee7b7;
+
+  --nutr-medium-bg: #78350f;
+  --nutr-medium-border: #b45309;
+  --nutr-medium-text: #fde68a;
+
+  --nutr-high-bg: #7f1d1d;
+  --nutr-high-border: #b91c1c;
+  --nutr-high-text: #fca5a5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}

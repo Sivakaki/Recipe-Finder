@@ -1,0 +1,12 @@
+.app {
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main {
+  width: min(1280px, 94%);
+  margin: 2rem auto 4rem;
+  flex: 1;
+}

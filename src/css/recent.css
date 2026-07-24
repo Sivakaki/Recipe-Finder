@@ -1,0 +1,248 @@
+.recent-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding: 1rem 0 4rem;
+  width: 100%;
+}
+
+/* ==========================================================================
+   PAGE HEADER
+   ========================================================================== */
+
+.recent-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.recent-heading-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.recent-title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.recent-title-icon {
+  color: var(--primary);
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.recent-subtitle {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Header right side */
+.recent-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.recent-count-badge {
+  background: var(--tag-bg);
+  color: var(--tag-color);
+  border: 1.5px solid var(--tag-border);
+  border-radius: var(--radius-pill);
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.5rem 1.25rem;
+  white-space: nowrap;
+}
+
+.clear-history-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1.2rem;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.clear-history-btn:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+  background: #fef2f2;
+}
+
+/* ==========================================================================
+   GROUPED TIMELINE
+   ========================================================================== */
+
+.recent-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.recent-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+/* ── Time group label ── */
+.recent-group-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.1rem;
+  background: var(--surface-alt);
+  border: 1.5px solid var(--tag-border);
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--tag-color);
+  width: fit-content;
+  letter-spacing: 0.01em;
+}
+
+.group-label-icon {
+  font-size: 0.9rem;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+/* Horizontal rule connector */
+.recent-group::before {
+  content: "";
+  display: none;
+}
+
+/* ── Cards grid ── */
+.recent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.75rem;
+}
+
+/* ==========================================================================
+   EMPTY STATE
+   ========================================================================== */
+
+.recent-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5rem 2rem;
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-lg);
+  gap: 1.2rem;
+}
+
+.recent-empty-icon {
+  font-size: 4.5rem;
+  color: var(--border);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.recent-empty-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.recent-empty-desc {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 380px;
+  line-height: 1.7;
+}
+
+.recent-empty-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.8rem 2rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.25);
+}
+
+.recent-empty-cta:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(13, 148, 136, 0.3);
+}
+
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .recent-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .recent-header-actions {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .recent-page {
+    gap: 2rem;
+  }
+
+  .recent-groups {
+    gap: 2.5rem;
+  }
+
+  .recent-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .recent-title {
+    font-size: 1.8rem;
+  }
+
+  .recent-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .recent-empty {
+    padding: 3.5rem 1.2rem;
+  }
+}
