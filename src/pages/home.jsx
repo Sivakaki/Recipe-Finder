@@ -1,11 +1,42 @@
+import { useState, useEffect } from "react";
 import { Search } from "../components/Search";
 import { RecipeCards } from "../components/RecipeCards";
 import { IoSparklesSharp } from "react-icons/io5";
 import { FaUtensils, FaClock, FaHeart } from "react-icons/fa6";
+import { getRandomRecipes, fetchRecipes } from "../services/recipeapi";
 
 import "../css/home.css";
 
 export const Home = () => {
+  const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Load initial random recipes
+  useEffect(() => {
+    const loadRandom = async () => {
+      setLoading(true);
+      try {
+        const data = await getRandomRecipes();
+        if (data && data.length > 0) setRecipes(data);
+      } catch (err) {
+        console.error("Error loading random recipes:", err);
+      }
+      setLoading(false);
+    };
+    loadRandom();
+  }, []);
+
+  const handleSearch = async (filters) => {
+    setLoading(true);
+    try {
+      const data = await fetchRecipes(filters);
+      if (data && data.length > 0) setRecipes(data);
+    } catch (err) {
+      console.error("Error searching recipes:", err);
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="home-page">
       <section className="hero-section">
@@ -56,9 +87,15 @@ export const Home = () => {
         </div>
       </section>
 
-      <Search />
+      <Search onSearch={handleSearch} />
 
-      <RecipeCards />
+      {loading ? (
+        <div style={{ textAlign: "center", padding: "3rem", fontSize: "1.2rem", fontWeight: "bold", color: "var(--primary)" }}>
+          Loading recipes...
+        </div>
+      ) : (
+        <RecipeCards recipes={recipes} />
+      )}
     </div>
   );
 };

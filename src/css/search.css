@@ -118,9 +118,10 @@
   transition: transform 0.25s ease;
 }
 
-.filter-toggle:hover .filter-arrow {
+.filter-arrow.open {
   transform: rotate(180deg);
 }
+
 
 /* ── Filter Panel (below the row) ── */
 .filter-container {

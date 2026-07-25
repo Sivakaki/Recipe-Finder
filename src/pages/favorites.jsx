@@ -1,66 +1,60 @@
 import { MdFavorite, MdFavoriteBorder, MdDelete } from "react-icons/md";
 import { FaFire } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 import { RecipeCard } from "../components/RecipeCard";
+import { useFavorite } from "../context/favoriteContext";
+import { useState } from "react";
 
 import "../css/favorites.css";
 
-/* ─── Static placeholder data (replace with real state/context later) ─── */
-const favoriteRecipes = [
-  {
-    id: 1,
-    title: "Chicken Fry",
-    image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=600",
-    description:
-      "Crispy golden chicken pieces seasoned with aromatic spices — a crowd-pleasing classic ready in 20 minutes.",
-    meal: "Main Meal",
-    people: 4,
-    time: "20 Minutes",
-  },
-  {
-    id: 2,
-    title: "Pasta Alfredo",
-    image:
-      "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600",
-    description:
-      "Silky cream sauce tossed with al-dente pasta and freshly grated parmesan. Simple, rich, and utterly satisfying.",
-    meal: "Dinner",
-    people: 2,
-    time: "30 Minutes",
-  },
-  {
-    id: 3,
-    title: "Veg Burger",
-    image:
-      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600",
-    description:
-      "A juicy, flavour-packed vegetable patty stacked with fresh toppings and a brioche bun — the ultimate veggie burger.",
-    meal: "Snack",
-    people: 1,
-    time: "15 Minutes",
-  },
-  {
-    id: 4,
-    title: "Fluffy Pancakes",
-    image:
-      "https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=600",
-    description:
-      "Light, airy breakfast pancakes with a golden crust. Perfect with maple syrup, fresh berries, or a dollop of cream.",
-    meal: "Breakfast",
-    people: 3,
-    time: "25 Minutes",
-  },
+const filterOptions = [
+  "All",
+  "Breakfast",
+  "Main Meal",
+  "Dinner",
+  "Snack",
+  "Dessert",
 ];
 
-
-
-const filterOptions = ["All", "Breakfast", "Main Meal", "Dinner", "Snack", "Dessert"];
-
 export const Favorites = () => {
-  const isEmpty = favoriteRecipes.length === 0;
+  const { favorites, clearAll } = useFavorite();
+  const navigate = useNavigate();
+
+  const [selectedFilter, setSelectedFilter] = useState("All");
+  const [sortBy, setSortBy] = useState("recent");
+
+  let filteredRecipes =
+    selectedFilter === "All"
+      ? favorites
+      : favorites.filter((recipe) => recipe.meal === selectedFilter);
+
+  let sortedRecipes = [...filteredRecipes];
+
+  switch (sortBy) {
+    case "az":
+      sortedRecipes.sort((a, b) => a.title.localeCompare(b.title));
+      break;
+
+    case "za":
+      sortedRecipes.sort((a, b) => b.title.localeCompare(a.title));
+      break;
+
+    case "time":
+      sortedRecipes.sort((a, b) => {
+        const timeA = a.time || a.readyInMinutes || 0;
+        const timeB = b.time || b.readyInMinutes || 0;
+        return timeA - timeB;
+      });
+      break;
+
+    default:
+      break;
+  }
+
+  const isEmpty = favorites.length === 0;
 
   return (
     <div className="favorites-page">
-
       {/* ── Page Header ── */}
       <header className="favorites-header">
         <div className="favorites-heading-group">
@@ -75,13 +69,13 @@ export const Favorites = () => {
 
         <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
           {!isEmpty && (
-            <button className="clear-all-btn">
+            <button className="clear-all-btn" onClick={clearAll}>
               <MdDelete />
               Clear all
             </button>
           )}
           <span className="favorites-count-badge">
-            {favoriteRecipes.length} Saved
+            {sortedRecipes.length} Saved
           </span>
         </div>
       </header>
@@ -97,7 +91,7 @@ export const Favorites = () => {
             Browse recipes and tap the heart icon to save your favourites here
             for quick access later.
           </p>
-          <button className="empty-cta-btn">
+          <button className="empty-cta-btn" onClick={() => navigate("/")}>
             <FaFire />
             Explore Recipes
           </button>
@@ -111,7 +105,8 @@ export const Favorites = () => {
               {filterOptions.map((opt) => (
                 <button
                   key={opt}
-                  className={`filter-chip${opt === "All" ? " active" : ""}`}
+                  onClick={() => setSelectedFilter(opt)}
+                  className={`filter-chip ${opt === selectedFilter ? "active" : ""}`}
                 >
                   {opt}
                 </button>
@@ -122,10 +117,15 @@ export const Favorites = () => {
               <label className="sort-label" htmlFor="sort-select">
                 Sort by:
               </label>
-              <select id="sort-select" className="sort-select">
+              <select
+                id="sort-select"
+                className="sort-select"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+              >
                 <option value="recent">Recently Added</option>
-                <option value="az">A – Z</option>
-                <option value="za">Z – A</option>
+                <option value="az">A - Z</option>
+                <option value="za">Z - A</option>
                 <option value="time">Cook Time</option>
               </select>
             </div>
@@ -133,7 +133,7 @@ export const Favorites = () => {
 
           {/* ── Favorites Grid ── */}
           <div className="favorites-grid">
-            {favoriteRecipes.map((recipe) => (
+            {sortedRecipes.map((recipe) => (
               <RecipeCard key={recipe.id} recipe={recipe} />
             ))}
           </div>
